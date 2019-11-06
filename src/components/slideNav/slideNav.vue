@@ -1,5 +1,6 @@
 <template>
   <div class="slide-nav">
+    <router-link to="/concat">dasdas</router-link>
     <el-menu
       :default-active="menuConf.defaultActive"
       :background-color="menuConf.backgroundColor"
@@ -12,12 +13,12 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-import { fetchTest } from '@/api/common'
+import { fetchNavConf } from '@/api/common'
 import item from './item.vue'
 
 interface listInterface {
     // 索引index是必须的
-    [index:number]:string;
+    [index:number]:object;
 }
 @Component({
   components: {
@@ -35,8 +36,9 @@ export default class HelloWorld extends Vue {
     activeColor: '#ffd04b'
   }
   created():void {
-    fetchTest().then((res:any) => {
-      this.list = res.data;
+    fetchNavConf().then((res:any) => {
+      this.list = res.data.data;
+      console.log(this.list, 'this.list')
     }).catch((err:any) => {
     })
   }
