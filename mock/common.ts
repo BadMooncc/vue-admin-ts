@@ -5,7 +5,7 @@ Mock.mock('/api/nav', {
     {
       code: 1,
       data: [
-        { id: '1', label: '导航1', icon: 'menu', link: '',children:[
+        { id: '1',name: 'concat', label: '导航1', icon: 'menu', link: '',children:[
           { id: '5', label: '选项1', icon: 'menu', link: '' },
           { id: '6', label: '选项2', icon: 'menu', link: ''}
         ] },
