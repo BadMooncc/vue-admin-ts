@@ -65,38 +65,23 @@ const Routes = new Router({
 store.dispatch('fetchNav').then(res => {
   console.log(store.state.navList, 'fetchNav')
   store.state.navList.forEach((el:any) => {
-    // console.log(el.name, 'elname')
-    const config = {
-        path: '',
-        // meta:el.meta,
-        component: layout,
-        children:[
-          {
-            path: el.link,
-            name:el.name,
-            components:() => import(`@/views/${el.model}/index.vue`),
-            meta: { title: 'home' }
-          }
-        ]
+    console.log(el.name, 'elname')
+    const config:object = {
+      path: el.link,
+      component: layout,
+      children:[
+        {
+          path: el.link,
+          component: () => import(`@/views/${el.name}/index.vue`),
+        }
+      ]
     }
-    console.log(config)
-    roleRoutes.push(config)
-    // console.log(`@/views/${el.model}/index.vue`)
-    // if(el.children) {
-    //   el.children.forEach((item:any) => {
-    //     config.children.push({
-    //       path: item.link,
-    //       components:() => import(`@/views/${item.model}/${item.name}.vue`),
-    //       meta: { title: item.title }
-    //     })
-    //     // console.log(`@/views/${item.model}/${item.name}.vue`)
-    //   })
-    // }
+    if(el.name) {
+      roleRoutes.push(config)
+    }
   });
-  
-  console.log(JSON.stringify(roleRoutes), 'roleRoutes')
+  console.log(roleRoutes, 'roleRoutes')
   Routes.addRoutes(roleRoutes)
-  console.log(Routes, 'Routes')
 }).catch(err => {
   console.error(err)
 })
