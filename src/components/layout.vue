@@ -1,10 +1,8 @@
 <template>
-  <div class="layput">
+  <div class="laoput">
     <slide-nav></slide-nav>
     <div class="container">
-      <router-link to="/home">home</router-link>
-      <router-link to="/about">about</router-link>
-      <router-link to="/">about222</router-link>
+      <router-view />
     </div>
   </div>
 </template>
@@ -25,6 +23,6 @@ export default class Layout extends Vue {
 
 <style lang="scss" scoped>
 .container {
-  padding-left: 300px;
+  padding-left: 200px;
 }
 </style>

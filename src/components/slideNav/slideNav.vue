@@ -1,6 +1,5 @@
 <template>
   <div class="slide-nav">
-    <router-link to="/concat">dasdas</router-link>
     <el-menu
       :default-active="menuConf.defaultActive"
       :background-color="menuConf.backgroundColor"

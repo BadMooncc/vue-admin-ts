@@ -1,12 +1,12 @@
 <template>
   <div>
-    aboutasdadsadasddsa
+    about
   </div>
 </template>
-<script>
+<script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
-@Component()
+@Component
 export default class About extends Vue {
-  
+
 }
 </script>
