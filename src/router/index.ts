@@ -4,6 +4,12 @@ import layout from '@/components/layout.vue'
 import home from '@/views/home/index.vue'
 import about from '@/views/about/index.vue'
 // import { Action } from 'vuex-class';
+interface routerConf{
+  model: string,
+  name: string,
+  link: string,
+  children: any
+}
 import store from '../store'
 Vue.use(Router)
 interface routesInterface {
@@ -61,12 +67,10 @@ const Routes = new Router({
     // }
   ]
 })
-
-store.dispatch('fetchNav').then(res => {
-  console.log(store.state.navList, 'fetchNav')
-  store.state.navList.forEach((el:any) => {
-    console.log(el.name, 'elname')
-    const config:object = {
+// 动态生成路由
+store.dispatch('fetchNav').then((res:object) => {
+  store.state.navList.forEach((el:routerConf) => {
+    const config:any = {
       path: el.link,
       component: layout,
       children:[
@@ -76,44 +80,21 @@ store.dispatch('fetchNav').then(res => {
         }
       ]
     }
+    if(el.children && el.children.length) {
+      el.children.forEach((item:routerConf) => {
+        config.children.push({
+          path: item.link,
+          component: () => import(`@/views/${item.model}/${item.name}.vue`),
+        })
+      })
+    }
     if(el.name) {
       roleRoutes.push(config)
     }
   });
-  console.log(roleRoutes, 'roleRoutes')
   Routes.addRoutes(roleRoutes)
 }).catch(err => {
   console.error(err)
 })
 // Routes.addRoutes(roleRoutes)
 export default Routes;
-// import Vue from 'vue'
-// import VueRouter from 'vue-router'
-// import Home from '../views/home/index.vue'
-
-// Vue.use(VueRouter)
-
-// const routes = [
-//   {
-//     path: '/',
-//     name: 'home',
-//     component: Home
-//   },
-//   {
-//     path: '/about',
-//     name: 'about',
-//     component: () => require('../views/about/index.vue')
-//   }
-// ]
-
-// const router = new VueRouter({
-//   mode: 'history',
-//   base: process.env.BASE_URL,
-//   routes
-// })
-// router.beforeEach((to, from, next) => {
-//   console.log(to, from)
-//   next();
-// })
-// export default router
-

@@ -1,9 +1,9 @@
 <template>
   <div class="list">
-    <div class="list-item"></div>
-    <div class="list-item"></div>
-    <div class="list-item"></div>
-    <div class="list-item"></div>
+    <div class="list-item">1</div>
+    <div class="list-item">1</div>
+    <div class="list-item">2</div>
+    <div class="list-item">3</div>
   </div>
 </template>
 <script>

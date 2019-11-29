@@ -5,7 +5,9 @@ Mock.mock('/api/nav', {
     {
       code: 1,
       data: [
-        { id: '1',model: 'home',name:'home', label: '导航1', icon: 'menu', link: '' },
+        { id: '1',model: 'home',name:'home', label: '导航1', icon: 'menu', link: '' ,children: [
+          {id: '1',model: 'home',name:'home1', label: '导航231', icon: 'menu', link: '/home/home1' }
+        ]},
         { id: '2',model: 'about', name: 'about', label: 'about', icon: 'menu', link: '/about' },
         { id: '3',model: 'concat', name: 'concat', label: 'concat', icon: 'menu', link: '/concat'}
       ]
