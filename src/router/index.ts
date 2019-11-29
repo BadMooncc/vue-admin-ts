@@ -27,44 +27,7 @@ const Routes = new Router({
     {
         path: '/',
         component: layout
-    },
-    // {
-    //   path: '',
-    //   component: layout,
-    //   // redirect: '/home',
-    //   children:[
-    //     {
-    //       path: '/home',
-    //       component: () => import('@/views/home/index.vue'),
-    //       name: 'home',
-    //       meta: { title: 'home' }
-    //     }
-    //   ]
-    // },
-    // {
-    //   path: '',
-    //   component: layout,
-    //   children:[
-    //     {
-    //       path: '/about',
-    //       component: () => import('@/views/about/index.vue'),
-    //       name: 'about',
-    //       meta: { title: 'about1' }
-    //     }
-    //   ]
-    // },
-    // {
-    //   path: '',
-    //   component: layout,
-    //   children:[
-    //     {
-    //       path: '/concat',
-    //       component: () => import('@/views/concat/index.vue'),
-    //       name: 'concat',
-    //       meta: { title: 'concat' }
-    //     }
-    //   ]
-    // }
+    }
   ]
 })
 // 动态生成路由
