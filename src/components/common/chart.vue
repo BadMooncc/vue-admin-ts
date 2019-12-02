@@ -23,8 +23,10 @@ export default class chart extends Vue {
         this.myChart.setOption(this.config.options);
     }
     public afreshDraw(data:any) {
-      this.config.options.series.data = data
-      this.myChart.setOption(this.config.options);
+      // console.log(this.config.options.series.data)
+      this.config.options.series[0].data = data
+      this.myChart.setOption(this.config.options, true);
+      console.log(this.config.options)
     }
    mounted() {
       this.drawLine()

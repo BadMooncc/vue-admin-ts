@@ -58,7 +58,7 @@ export default class About extends Vue {
   private phaseAll = {
     week: [300,400,100],
     month: [600,800,300],
-    quarter: [1000,1800,800]
+    quarter: [1000,1800,3000]
   }
   private phaseData = this.phaseAll.week;
   public config = {
