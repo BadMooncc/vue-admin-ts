@@ -8,18 +8,23 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import Echarts from 'echarts'
 interface config{
-  options: object,
+  options: any,
   width: string,
   height: string
 }
 @Component
 export default class chart extends Vue {
    @Prop() public config!: config;
-   drawLine(){
+   private myChart:any = {}
+   public drawLine(){
         // 基于准备好的dom，初始化echarts实例
-        let myChart = Echarts.init(this.$refs.echarts)
+        this.myChart = Echarts.init(this.$refs.echarts)
         // 绘制图表
-        myChart.setOption(this.config.options);
+        this.myChart.setOption(this.config.options);
+    }
+    public afreshDraw(data:any) {
+      this.config.options.series.data = data
+      this.myChart.setOption(this.config.options);
     }
    mounted() {
       this.drawLine()

@@ -8,7 +8,8 @@ interface routerConf{
   model: string,
   name: string,
   link: string,
-  children: any
+  children: any,
+  meta:object
 }
 import store from '../store'
 Vue.use(Router)
@@ -30,6 +31,11 @@ const Routes = new Router({
     }
   ]
 })
+Routes.beforeEach((to, from, next) => {
+  // ...
+  document.title = to.meta.title || '未知'
+  next()
+})
 // 动态生成路由
 store.dispatch('fetchNav').then((res:object) => {
   store.state.navList.forEach((el:routerConf) => {
@@ -39,6 +45,8 @@ store.dispatch('fetchNav').then((res:object) => {
       children:[
         {
           path: el.link,
+          name: el.name,
+          meta: el.meta,
           component: () => import(`@/views/${el.name}/index.vue`),
         }
       ]
@@ -47,6 +55,8 @@ store.dispatch('fetchNav').then((res:object) => {
       el.children.forEach((item:routerConf) => {
         config.children.push({
           path: item.link,
+          name: item.name,
+          meta: item.meta,
           component: () => import(`@/views/${item.model}/${item.name}.vue`),
         })
       })
