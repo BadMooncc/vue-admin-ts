@@ -6,4 +6,10 @@
   </div>
 </template>
 
+<style lang="scss" scoped>
+#app {
+  background: #f0f0f0;
+}
+</style>
+
 
