@@ -41,16 +41,23 @@
       </el-col>
     </el-row>
     <el-row class="section">
-      
+      <el-col :span="12">
+        <common-table :header="tableHeader"></common-table>
+      </el-col>
+      <el-col :span="12">
+
+      </el-col>
     </el-row>
   </div>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import echart from "@/components/common/chart.vue";
+import commonTable from "@/components/common/commonTable.vue";
 @Component({
   components: {
-    echart
+    echart,
+    commonTable
   }
 })
 export default class About extends Vue {
@@ -58,6 +65,19 @@ export default class About extends Vue {
   $refs!: {
     phase: echart;
   };
+  private tableHeader = [
+    {prop: 'title', label: '标题'},
+    {prop: 'content', label: '内容'},
+    {
+      prop: 'img',
+      label: '图片',
+      // render (h:any, params:any) {
+      //     return (
+      //         <img style="width:80px;height:80px;" src={params.row.image_url} />
+      //     )
+      // }
+  },
+  ]
   private phaseActive = "week";
   private phaseAll = {
     week: [300, 400, 100],
@@ -94,25 +114,40 @@ export default class About extends Vue {
       ]
     }
   };
+  // 当日实时数据
   public config2 = {
     width: "100%",
     height: "300px",
     options: {
-      tooltip: {},
-      title: { text: "当日实时访问量" },
+      tooltip: {
+        axisPointer: {
+          type: 'cross'
+        }
+      },
+      legend: {
+        data: ['当日实时访问量', '当日实时成交量']
+      },
+      title: { text: "当日实时数据" },
       xAxis: {
         type: "category",
-        data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+        data: ["0-4点", "4-8点", "8-12点", "12-16点", "16-20点", "20点以后"]
       },
       yAxis: {
         type: "value"
       },
       series: [
         {
-          data: [820, 932, 901, 934, 1290, 1330, 1320],
-          type: "line",
+            name:'当日实时访问量',
+            type:'line',
+            data:[820, 932, 901, 934, 1290, 1330, 1320]
+        },
+        {
+          name: '当日实时成交量',
+          barWidth: '30px',
+          data: [82, 93, 91, 94, 190, 130, 320],
+          type: "bar",
           smooth: true
-        }
+        },
       ]
     }
   };
@@ -152,7 +187,9 @@ export default class About extends Vue {
     console.log(this.phaseData);
     console.log(this.$refs.phase.afreshDraw(data), "this.$refs.phase");
   }
-  mounted() {}
+  created():void {
+    console.log(123)
+  }
 }
 </script>
 <style lang="scss" scoped>

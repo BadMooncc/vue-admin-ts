@@ -32,7 +32,7 @@ export default class Item extends Vue {
   @Prop() private list!: number;
 
   created():void{
-    console.log(this.list)
+    console.log(this.list, '23')
   }
 }
 </script>
