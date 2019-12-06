@@ -42,7 +42,7 @@
     </el-row>
     <el-row class="section">
       <el-col :span="12">
-        <common-table :header="tableHeader"></common-table>
+        <common-table :header="tableHeader" :list="[{title:'12',content:'34',img:''}]"></common-table>
       </el-col>
       <el-col :span="12">
 
@@ -65,19 +65,21 @@ export default class About extends Vue {
   $refs!: {
     phase: echart;
   };
-  private tableHeader = [
+  protected tableHeader = [
     {prop: 'title', label: '标题'},
     {prop: 'content', label: '内容'},
     {
       prop: 'img',
       label: '图片',
-      // render (h:any, params:any) {
-      //     return (
-      //         <img style="width:80px;height:80px;" src={params.row.image_url} />
-      //     )
-      // }
-  },
-  ]
+      render(h:any, params:any){
+        console.log(params, 'this')
+        return h('span',params)
+        // 报错？
+        // return (
+        //   <div>{params}</div>
+        // )
+      }
+  }]
   private phaseActive = "week";
   private phaseAll = {
     week: [300, 400, 100],
