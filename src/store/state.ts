@@ -1,5 +1,6 @@
 const state:Object = {
-  navList: []
+  navList: [],
+  navActive: ''
 }
 
 export default state

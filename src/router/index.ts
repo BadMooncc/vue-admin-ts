@@ -19,6 +19,7 @@ interface routesInterface {
 const defaultRoutes:routesInterface = [
   {
     path: '/',
+    redirect:'/dashboard',
     component: layout
   },
   {
@@ -47,7 +48,8 @@ Routes.beforeEach((to, from, next) => {
   next()
 })
 // 动态生成路由
-store.dispatch('fetchNav').then((res:object) => {
+store.dispatch('fetchNav').then(() => {
+  // store.state.navActive = res
   store.state.navList.forEach((el:routerConf) => {
     const config:any = {
       path: el.link,

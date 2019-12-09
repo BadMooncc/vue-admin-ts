@@ -28,7 +28,7 @@ export default class HelloWorld extends Vue {
   // 导航栏列表
   private list:listInterface = [];
   // 导航栏样式配置
-  private menuConf: Object = {
+  private menuConf: any = {
     defaultActive: '2',
     backgroundColor: '#545c64',
     textColor: '#fff',
@@ -37,6 +37,7 @@ export default class HelloWorld extends Vue {
   created():void {
     fetchNavConf().then((res:any) => {
       this.list = res.data.data;
+      this.menuConf.defaultActive = res.data.active;
       console.log(this.list, 'this.list')
     }).catch((err:any) => {
     })

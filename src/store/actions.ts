@@ -5,7 +5,8 @@ import { fetchNavConf } from '@/api/common'
 const actions:ActionTree<any, any> = {
   fetchNav({state, commit}){
     return fetchNavConf().then(res => {
-      commit('fetchNav', res.data.data);
+      console.log(res.data, 'fetchNav')
+      commit('fetchNav', res.data);
     })
   }
 }
