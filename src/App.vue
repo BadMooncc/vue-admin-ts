@@ -1,14 +1,16 @@
 <template>
   <div id="app">
-    <div>
-      <router-view />
-    </div>
+    <router-view />
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style>
+html, body {
+  height: 100%;
+}
 #app {
   background: #f0f0f0;
+  height: 100%;
 }
 </style>
 

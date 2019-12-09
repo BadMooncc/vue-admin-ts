@@ -1,7 +1,7 @@
 import Router from 'vue-router'
 import Vue from 'vue'
 import layout from '@/components/layout.vue'
-import home from '@/views/home/index.vue'
+import login from '@/views/login/index.vue'
 import about from '@/views/about/index.vue'
 // import { Action } from 'vuex-class';
 interface routerConf{
@@ -20,6 +20,10 @@ const defaultRoutes:routesInterface = [
   {
     path: '/',
     component: layout
+  },
+  {
+    path: '/login',
+    component: login
   }
 ];
 const roleRoutes:any = [];
@@ -28,6 +32,12 @@ const Routes = new Router({
     {
         path: '/',
         component: layout
+    },
+    {
+      path: '/login',
+      name: 'login',
+      meta: {},
+      component: login,
     }
   ]
 })

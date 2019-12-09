@@ -11,7 +11,7 @@
         <p class="section-main">10</p>
       </el-col>
       <el-col
-        @click.native="handleClick('month', phaseAll.month)"
+        @click.native="ihandleClick('month', phaseAll.month)"
         :span="8"
         class="section-item"
         :class="phaseActive === 'month' ? 'section-item_active':''"
@@ -41,16 +41,28 @@
       </el-col>
     </el-row>
     <el-row class="section">
-      <el-col :span="12">
-        <common-table :header="tableHeader" :list="[{title:'12',content:'34',img:''}]"></common-table>
+      <el-col :span="11">
+        <el-card>
+          <span slot="header"><b>实时成交数据</b></span>
+          <common-table 
+            :header="tableHeader" 
+            :list="[{id:'1', title:'12',content:'34',img:''}]">
+          </common-table>
+        </el-card>
       </el-col>
-      <el-col :span="12">
-
+      <el-col :span="11" :offset="2">
+         <el-card>
+          <span slot="header"><b>流失数据统计</b></span>
+          <common-table 
+            :header="tableHeader" 
+            :list="[{id:'1', title:'12',content:'34',img:''}]">
+          </common-table>
+        </el-card>
       </el-col>
     </el-row>
   </div>
 </template>
-<script lang="ts">
+<script lang="tsx">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import echart from "@/components/common/chart.vue";
 import commonTable from "@/components/common/commonTable.vue";
@@ -65,21 +77,51 @@ export default class About extends Vue {
   $refs!: {
     phase: echart;
   };
+
   protected tableHeader = [
-    {prop: 'title', label: '标题'},
-    {prop: 'content', label: '内容'},
+    { prop: "title", label: "标题" },
+    { prop: "content", label: "内容" },
     {
-      prop: 'img',
-      label: '图片',
-      render(h:any, params:any){
-        console.log(params, 'this')
-        return h('span',params)
+      prop: "img",
+      label: "图片",
+      render: (h: any, params: any) => {
+        return h("span", [
+          h(
+            "el-button",
+            {
+              //第2个参数 - 在一个对象里设置该标签属性
+              attrs: {
+                type: "primary",
+                size: "mini"
+              },
+              on: {
+                click: () => this.handleEdit(params)
+              }
+            },
+            "发货"
+          ),
+          h(
+            "el-button",
+            {
+              //第2个参数 - 在一个对象里设置该标签属性
+              attrs: {
+                type: "danger",
+                size: "mini"
+              },
+              on: {
+                click: () => this.handleDelete(params)
+              }
+            },
+            "详细"
+          )
+        ]);
         // 报错？
         // return (
-        //   <div>{params}</div>
+        //   <div>123</div>
         // )
       }
-  }]
+    }
+  ];
   private phaseActive = "week";
   private phaseAll = {
     week: [300, 400, 100],
@@ -123,11 +165,11 @@ export default class About extends Vue {
     options: {
       tooltip: {
         axisPointer: {
-          type: 'cross'
+          type: "cross"
         }
       },
       legend: {
-        data: ['当日实时访问量', '当日实时成交量']
+        data: ["当日实时访问量", "当日实时成交量"]
       },
       title: { text: "当日实时数据" },
       xAxis: {
@@ -139,17 +181,17 @@ export default class About extends Vue {
       },
       series: [
         {
-            name:'当日实时访问量',
-            type:'line',
-            data:[820, 932, 901, 934, 1290, 1330, 1320]
+          name: "当日实时访问量",
+          type: "line",
+          data: [820, 932, 901, 934, 1290, 1330, 1320]
         },
         {
-          name: '当日实时成交量',
-          barWidth: '30px',
+          name: "当日实时成交量",
+          barWidth: "30px",
           data: [82, 93, 91, 94, 190, 130, 320],
           type: "bar",
           smooth: true
-        },
+        }
       ]
     }
   };
@@ -189,8 +231,15 @@ export default class About extends Vue {
     console.log(this.phaseData);
     console.log(this.$refs.phase.afreshDraw(data), "this.$refs.phase");
   }
-  created():void {
-    console.log(123)
+  private handleDelete(params: any) {
+    console.log(this, params);
+  }
+  private handleEdit(params: any) {
+    console.log(params.row.id, "params");
+    this.$router.push(`/about?id=${params.row.id}`);
+  }
+  created(): void {
+    console.log(this.phaseActive, 123);
   }
 }
 </script>
@@ -224,7 +273,7 @@ export default class About extends Vue {
 
   .section-item_active {
     .section-main {
-      color: #add7ff;
+      color: #add7ff !important;
     }
   }
   .section-item:hover {

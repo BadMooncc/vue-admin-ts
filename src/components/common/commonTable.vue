@@ -18,6 +18,7 @@
   </div>
 </template>
 <script lang="ts">
+import { Component, Prop, Vue } from "vue-property-decorator";
 var exSlot = {
   functional: true,
   props: {
@@ -38,7 +39,6 @@ var exSlot = {
     return ctx.props.render(h, params);
   }
 };
-import { Component, Prop, Vue } from "vue-property-decorator";
 interface tableHeader {
   [index: number]: object;
 }
