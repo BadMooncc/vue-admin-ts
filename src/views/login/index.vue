@@ -42,16 +42,29 @@
 </template>
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
+import { login } from '@/api/common';
+interface resInterface{
+  code: number,
+  msg: string,
+  data: object
+}
 @Component
 export default class Login extends Vue {
   private form = {
-    user: '123',
+    username: '123',
     password: '2'
   };
   private handleLogin (){
-    console.log(this.form)
+
+    login(this.form).then((res:any) => {
+      if(res.code === 1) {
+        this.$message.success('登陆成功！')
+        this.$router.push('/')
+      }
+      console.log(res)
+    })
     // 请求
-    this.$router.push('/')
+    
   }
 } 
 </script>

@@ -6,3 +6,10 @@ export function fetchNavConf () {
     method: 'get'
   })
 }
+export function login (params:object) {
+  return request({
+    url: '/api/login',
+    method: 'get',
+    data:params
+  })
+}
